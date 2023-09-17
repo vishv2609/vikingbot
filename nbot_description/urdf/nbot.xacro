@@ -1,0 +1,138 @@
+<?xml version="1.0" ?>
+<robot name="nbot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<xacro:include filename="$(find nbot_description)/urdf/materials.xacro" />
+<xacro:include filename="$(find nbot_description)/urdf/nbot.trans" />
+<xacro:include filename="$(find nbot_description)/urdf/nbot.gazebo" />
+<link name="base_link">
+  <inertial>
+    <origin xyz="-0.002225808134467124 5.387398035171918e-06 0.05152529612945843" rpy="0 0 0"/>
+    <mass value="9.612754025416804"/>
+    <inertia ixx="0.028823" iyy="0.064259" izz="0.091602" ixy="-4e-06" iyz="-1e-06" ixz="-8.2e-05"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://nbot_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://nbot_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="right_wheel_1">
+  <inertial>
+    <origin xyz="-5.245803791353865e-15 0.0049999999999999906 6.938893903907228e-18" rpy="0 0 0"/>
+    <mass value="1.2207443653686525"/>
+    <inertia ixx="0.000811" iyy="0.001541" izz="0.000811" ixy="0.0" iyz="-0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.12 0.12 -0.05" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://nbot_description/meshes/right_wheel_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="black"/>
+  </visual>
+  <collision>
+    <origin xyz="0.12 0.12 -0.05" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://nbot_description/meshes/right_wheel_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="lefft_wheel_1">
+  <inertial>
+    <origin xyz="-5.245803791353865e-15 -0.005000000000000018 6.938893903907228e-18" rpy="0 0 0"/>
+    <mass value="1.2207443653686525"/>
+    <inertia ixx="0.000811" iyy="0.001541" izz="0.000811" ixy="0.0" iyz="-0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.12 -0.12 -0.05" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://nbot_description/meshes/lefft_wheel_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="black"/>
+  </visual>
+  <collision>
+    <origin xyz="0.12 -0.12 -0.05" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://nbot_description/meshes/lefft_wheel_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="lidar_1">
+  <inertial>
+    <origin xyz="0.0 0.0 0.005000000000000018" rpy="0 0 0"/>
+    <mass value="0.22195352097611892"/>
+    <inertia ixx="5.2e-05" iyy="5.2e-05" izz="0.0001" ixy="0.0" iyz="-0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.0 -0.0 -0.12" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://nbot_description/meshes/lidar_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="red"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.0 -0.0 -0.12" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://nbot_description/meshes/lidar_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="castor_wheel_1">
+  <inertial>
+    <origin xyz="-0.05000000000000002 -4.57107086851739e-18 -0.01638157894736842" rpy="0 0 0"/>
+    <mass value="0.4880922336280392"/>
+    <inertia ixx="0.000117" iyy="0.000117" izz="0.000136" ixy="-0.0" iyz="0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.15 -0.0 -0.04" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://nbot_description/meshes/castor_wheel_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="black"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.15 -0.0 -0.04" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://nbot_description/meshes/castor_wheel_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="right_wheel_joint" type="continuous">
+  <origin xyz="-0.12 -0.12 0.05" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="right_wheel_1"/>
+  <axis xyz="0.0 1.0 0.0"/>
+</joint>
+
+<joint name="left_wheel_joint" type="continuous">
+  <origin xyz="-0.12 0.12 0.05" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="lefft_wheel_1"/>
+  <axis xyz="0.0 1.0 0.0"/>
+</joint>
+
+<joint name="lidar_joint" type="fixed">
+  <origin xyz="0.0 0.0 0.12" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="lidar_1"/>
+</joint>
+
+<joint name=" castor_joint" type="fixed">
+  <origin xyz="0.15 0.0 0.04" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="castor_wheel_1"/>
+</joint>
+
+</robot>
